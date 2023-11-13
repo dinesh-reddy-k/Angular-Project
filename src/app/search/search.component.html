@@ -1,0 +1,42 @@
+<div class="container12">
+    <div>
+        <input type="text" #name placeholder="Enter Name" name="name">
+        <input type="text" #city placeholder="Enter City" name="city">
+        <select #type style="width: max-content;">
+            <option value="">please select options</option>
+            <option value="large">large</option>
+            <option value="brewpub">brewpub</option>
+            <option value="contract">contract</option>
+            <option value="micro">micro</option>
+            <option value="closed">closed</option>
+        </select>
+        <button (click)="applyFilters(name.value,city.value, type.value)">Submit</button>
+    </div>
+    <h1 *ngIf="isSearch"> Table data of the info</h1>
+    <table *ngIf="isSearch">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Brewery Type</th>
+                <th>City</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Location</th>
+                <th>Website</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of data">
+                <td><a [routerLink]="['/info', user.id]">{{user.id}}</a></td>
+                <td>{{user.name}}</td>
+                <td>{{user.brewery_type}}</td>
+                <td>{{user.city}}</td>
+                <td>{{user.phone}}</td>
+                <td>{{user.street}}, {{user.state}}</td>
+                <td>{{user.website_url}}</td>
+                <td><button (click)="navigateToNextPage(user.id)">view details</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
